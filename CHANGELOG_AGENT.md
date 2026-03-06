@@ -39,3 +39,13 @@
 - 新增失败时产物上传：`playwright-report` 与 `test-results`（`if: failure()`）。
 - 本地按要求执行 `bash scripts/ci.sh` 验证通过（Unit 5/5，E2E 3/3）。
 - 新增 `REVIEW_R5.md`、`TEST_REPORT_R5.md`、`DONE_R5`。
+
+## R6 执行记录（2026-03-06）
+- 重构 `.github/workflows/ci.yml`：由单 job 拆分为并行 `unit_tests` 与 `e2e_tests`（均使用 Node 22）。
+- `e2e_tests` 保留 Playwright Chromium 安装：`npx playwright install --with-deps chromium`。
+- 两个 job 均新增 `GITHUB_STEP_SUMMARY` 写入：输出通过/失败状态与测试数量（总数/通过/失败）。
+- 失败时上传对应产物：
+  - `unit_tests`：`unit-test.log`
+  - `e2e_tests`：`playwright-report`、`test-results`、`e2e-test.log`
+- 本地验证通过：`npm test`（5/5）、`npm run test:e2e`（3/3）。
+- 新增 `REVIEW_R6.md`、`TEST_REPORT_R6.md`、`DONE_R6`。

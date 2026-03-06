@@ -1,0 +1,14 @@
+DONE_R6
+
+Date: 2026-03-06
+Status: COMPLETED
+
+Completed items:
+1) 重构 `.github/workflows/ci.yml` 为并行 jobs：`unit_tests` 与 `e2e_tests`（均 Node 22）。
+2) `e2e_tests` 增加 Playwright Chromium 安装：`npx playwright install --with-deps chromium`。
+3) 两个 job 均在结束时写入 `GITHUB_STEP_SUMMARY`，包含通过/失败状态与测试数量。
+4) 失败时上传对应产物：
+   - `unit_tests`: `unit-test.log`
+   - `e2e_tests`: `playwright-report`、`test-results`、`e2e-test.log`
+5) 本地验证通过：`npm test`、`npm run test:e2e`。
+6) 产出 `REVIEW_R6.md`、`TEST_REPORT_R6.md`、`DONE_R6`，并更新 `CHANGELOG_AGENT.md`。
