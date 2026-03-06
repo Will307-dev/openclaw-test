@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks Demo</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>任务清单</h1>
+        <button id="theme-toggle" type="button" class="secondary">切换主题</button>
+      </header>
+
+      <form id="task-form" class="task-form">
+        <input
+          id="task-input"
+          type="text"
+          placeholder="输入任务内容，按回车快速提交"
+          maxlength="120"
+          required
+        />
+        <button id="submit-btn" type="submit">新增任务</button>
+      </form>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <ul id="task-list" class="task-list"></ul>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

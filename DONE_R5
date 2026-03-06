@@ -1,0 +1,12 @@
+DONE_R5
+
+Date: 2026-03-06
+Status: COMPLETED
+
+Completed items:
+1) 修改 `.github/workflows/ci.yml`：新增 `concurrency` 取消重复运行，新增 `timeout-minutes`，触发收敛到 `main + PR(main)` 并保留 `workflow_dispatch` 可配置入口。
+2) 增加缓存优化：保留 npm cache，并新增 Playwright 浏览器缓存（`~/.cache/ms-playwright`）。
+3) 新增失败时上传 Playwright 产物：`playwright-report`、`test-results`。
+4) 未在本地运行 GitHub Actions；已按要求执行 `bash scripts/ci.sh` 并验证通过。
+5) 产出 `REVIEW_R5.md`、`TEST_REPORT_R5.md` 并更新 `CHANGELOG_AGENT.md`。
+6) 生成并输出 `DONE_R5`。

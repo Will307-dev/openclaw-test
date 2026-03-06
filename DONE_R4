@@ -1,0 +1,12 @@
+DONE_R4
+
+Date: 2026-03-05
+Status: COMPLETED
+
+Completed items:
+1) 创建 `.github/workflows/ci.yml`（`ubuntu-latest` + Node 22）。
+2) 工作流执行 `npm ci`、`npx playwright install --with-deps chromium`、`bash scripts/ci.sh`。
+3) 补充 `package.json`：新增 `ci` 脚本（`bash scripts/ci.sh`）。
+4) 产出 `REVIEW_R4.md`、`TEST_REPORT_R4.md`，并更新 `CHANGELOG_AGENT.md`。
+5) 本地执行 `bash scripts/ci.sh`，验证通过（Unit 5/5，E2E 3/3）。
+6) 输出 `DONE_R4`。

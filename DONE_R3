@@ -1,0 +1,12 @@
+DONE_R3
+
+Date: 2026-03-05
+Status: COMPLETED
+
+Completed items:
+1) 扩展 e2e.spec.js 覆盖删除任务与异常路径（新增2个用例）。
+2) 无需修改前端业务代码即可满足可测性与验证需求。
+3) 新增 scripts/ci.sh（npm test && npm run test:e2e）。
+4) 更新 REVIEW_R3.md、TEST_REPORT_R3.md、CHANGELOG_AGENT.md。
+5) 运行全部测试并通过（Unit 5/5, E2E 3/3）。
+6) 输出 DONE_R3。

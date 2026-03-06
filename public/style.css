@@ -1,0 +1,133 @@
+:root {
+  --bg: #f5f7fb;
+  --card-bg: #ffffff;
+  --text: #1d2733;
+  --border: #d6dee8;
+  --accent: #0b6ed0;
+  --success: #117a3a;
+  --error: #b42318;
+  --muted: #5d7288;
+}
+
+:root[data-theme='dark'] {
+  --bg: #111a24;
+  --card-bg: #1a2634;
+  --text: #e4ebf2;
+  --border: #2f4155;
+  --accent: #64a9ff;
+  --success: #46c77e;
+  --error: #ff8b8b;
+  --muted: #a6b7c8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  width: min(680px, 92vw);
+  margin: 32px auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.task-form {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+input,
+button {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+input {
+  flex: 1;
+  background: transparent;
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: opacity 0.2s ease;
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.task-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.task-item button {
+  background: #c53b2f;
+}
+
+.status {
+  min-height: 20px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.status[data-type='loading'] {
+  color: var(--accent);
+}
+
+.status[data-type='success'] {
+  color: var(--success);
+}
+
+.status[data-type='error'] {
+  color: var(--error);
+}
+
+.empty-state {
+  color: var(--muted);
+  font-size: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
