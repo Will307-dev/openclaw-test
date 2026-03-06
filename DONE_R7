@@ -1,0 +1,12 @@
+DONE_R7
+
+Date: 2026-03-06
+Status: COMPLETED
+
+Completed items:
+1) Added coverage gate with c8 (lines >= 70%).
+2) Added scripts: `test:coverage`, `ci:strict`.
+3) Updated CI unit job to run coverage and write coverage summary.
+4) Added npm install retry strategy (3 attempts) in unit/e2e jobs.
+5) Added unit failure artifacts for coverage diagnostics.
+6) Local validation passed (`npm run test:coverage`, `npm run test:e2e`).

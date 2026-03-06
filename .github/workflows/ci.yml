@@ -41,8 +41,18 @@ jobs:
       - name: Force npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (with retry)
+        shell: bash
+        run: |
+          for i in 1 2 3; do
+            npm ci && break
+            if [ "$i" -eq 3 ]; then
+              echo "npm ci failed after 3 attempts" >&2
+              exit 1
+            fi
+            echo "npm ci failed (attempt $i), retrying in 5s..."
+            sleep 5
+          done
 
       - name: Run unit tests
         id: unit_run
@@ -68,6 +78,26 @@ jobs:
           echo "fails=${fails:-0}" >> "$GITHUB_OUTPUT"
           exit "$exit_code"
 
+      - name: Run coverage check
+        id: coverage_run
+        shell: bash
+        run: |
+          set +e
+          npm run test:coverage 2>&1 | tee coverage.log
+          exit_code=${PIPESTATUS[0]}
+          set -e
+
+          lines=$(node -e "try{const s=require('./coverage/coverage-summary.json').total.lines.pct; console.log(s);}catch(e){console.log('unknown')}")
+          if [ "$exit_code" -eq 0 ]; then
+            status="passed"
+          else
+            status="failed"
+          fi
+
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "lines=$lines" >> "$GITHUB_OUTPUT"
+          exit "$exit_code"
+
       - name: Write unit summary
         if: always()
         run: |
@@ -77,14 +107,21 @@ jobs:
             echo "- Total: ${{ steps.unit_run.outputs.tests }}"
             echo "- Passed: ${{ steps.unit_run.outputs.passes }}"
             echo "- Failed: ${{ steps.unit_run.outputs.fails }}"
+            echo ""
+            echo "## Coverage"
+            echo "- Status: ${{ steps.coverage_run.outputs.status }}"
+            echo "- Lines: ${{ steps.coverage_run.outputs.lines }}% (threshold: 70%)"
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Upload unit test log on failure
+      - name: Upload unit artifacts on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-test-log-${{ github.run_id }}
-          path: unit-test.log
+          name: unit-artifacts-${{ github.run_id }}
+          path: |
+            unit-test.log
+            coverage.log
+            coverage
           if-no-files-found: ignore
           retention-days: 7
 
@@ -112,8 +149,18 @@ jobs:
       - name: Force npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (with retry)
+        shell: bash
+        run: |
+          for i in 1 2 3; do
+            npm ci && break
+            if [ "$i" -eq 3 ]; then
+              echo "npm ci failed after 3 attempts" >&2
+              exit 1
+            fi
+            echo "npm ci failed (attempt $i), retrying in 5s..."
+            sleep 5
+          done
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium

@@ -49,3 +49,17 @@
   - `e2e_tests`：`playwright-report`、`test-results`、`e2e-test.log`
 - 本地验证通过：`npm test`（5/5）、`npm run test:e2e`（3/3）。
 - 新增 `REVIEW_R6.md`、`TEST_REPORT_R6.md`、`DONE_R6`。
+
+## R7 执行记录（2026-03-06）
+- 新增覆盖率门禁：引入 `c8`，`test:coverage` 对 lines 设置阈值 `>= 70%`。
+- `package.json` 新增脚本：
+  - `test:coverage`
+  - `ci:strict`（coverage + e2e）
+- CI 优化（`.github/workflows/ci.yml`）：
+  - `unit_tests` 新增 `Run coverage check`，并将覆盖率写入 `GITHUB_STEP_SUMMARY`。
+  - `unit_tests` 与 `e2e_tests` 的安装步骤改为 `npm ci` 轻量重试（最多 3 次，间隔 5 秒）。
+  - unit 失败时上传诊断产物扩展为：`unit-test.log`、`coverage.log`、`coverage/`。
+- 本地验证：
+  - `npm run test:coverage` 通过（Lines 71.57%）
+  - `npm run test:e2e` 通过（3/3）
+- 新增文档：`ORCHESTRATION_R7.md`、`REVIEW_R7.md`、`TEST_REPORT_R7.md`、`DONE_R7`。
