@@ -1,0 +1,11 @@
+DONE_R8
+
+Date: 2026-03-06
+Status: COMPLETED
+
+Completed items:
+1) Added CI-only flaky retry policy for E2E (`retries=1` via Playwright config + CI env).
+2) Added Playwright failure diagnostics (`trace retain-on-failure`, `screenshot only-on-failure`).
+3) Updated CI e2e job to run `test:e2e:ci` and summarize flaky count.
+4) Kept failure artifact upload paths for report/log/test-results.
+5) Verified locally (`npm run test:e2e:ci`, `npm run ci:strict`).

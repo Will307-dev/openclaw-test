@@ -63,3 +63,20 @@
   - `npm run test:coverage` 通过（Lines 71.57%）
   - `npm run test:e2e` 通过（3/3）
 - 新增文档：`ORCHESTRATION_R7.md`、`REVIEW_R7.md`、`TEST_REPORT_R7.md`、`DONE_R7`。
+
+## R8 执行记录（2026-03-06）
+- 新增 `playwright.config.js`：
+  - `retries: process.env.CI ? 1 : 0`
+  - `trace: retain-on-failure`
+  - `screenshot: only-on-failure`
+  - `outputDir: test-results`
+- `package.json` 更新：
+  - 新增 CI 专用脚本 `test:e2e:ci`
+  - `ci:strict` 改为 `test:coverage + test:e2e:ci`
+- `.github/workflows/ci.yml` 更新（e2e job）：
+  - 执行命令切换为 `npm run test:e2e:ci`
+  - E2E 结果新增 flaky 解析与 summary 展示（Flaky(retried), Retry policy）
+- 本地验证通过：
+  - `npm run test:e2e:ci` -> 3/3
+  - `npm run ci:strict` -> PASS（coverage + e2e）
+- 新增文档：`ORCHESTRATION_R8.md`、`REVIEW_R8.md`、`TEST_REPORT_R8.md`、`DONE_R8`。
